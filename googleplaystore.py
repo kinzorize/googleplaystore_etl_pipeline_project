@@ -137,6 +137,33 @@ conn.autocommit = True
 
 cursor = redshift_connector.Cursor = conn.cursor()
 
+cursor.execute("""CREATE TABLE "googleplaystore_clean" (
+"index" INTEGER,
+  "app" TEXT,
+  "category" TEXT,
+  "rating" TEXT,
+  "reviews" REAL,
+  "size" TEXT,
+  "installs" TEXT,
+  "price" TEXT,
+  "content rating" TEXT,
+  "genres" TEXT,
+  "last updated" TEXT,
+  "current ver" TEXT,
+  "android ver" TEXT
+)
+""")
+
+cursor.execute("""
+CREATE TABLE "googleplaystore_review" (
+"index" INTEGER,
+  "App" TEXT,
+  "Translated_Review" TEXT,
+  "Sentiment" TEXT,
+  "Sentiment_Polarity" TEXT,
+  "Sentiment_Subjectivity" TEXT
+)
+""")
 cursor.execute("""
 copy googleplaystore_clean from 's3://elijah-covid-project/output/googleplaystore_clean.csv'
 credentials 'aws_iam_role:arn:aws:iam::490101006133:role/redshift-s3-access'
