@@ -125,14 +125,13 @@ googleplaystore_review_sql = pd.io.sql.get_schema(
     googleplaystore_review.reset_index(), 'googleplaystore_review')
 print(''.join(googleplaystore_review_sql))
 
-
+# code to copy paste in glue job to create table and copy the csv to the created table
 conn = redshift_connector.connect(
     host='redshift-cluster-1.cq86xufekc54.us-east-1.redshift.amazonaws.com',
     database='dev',
     user='awsuser',
     password='123Success'
 )
-
 conn.autocommit = True
 
 cursor = redshift_connector.Cursor = conn.cursor()
@@ -165,8 +164,8 @@ CREATE TABLE "googleplaystore_review" (
 )
 """)
 cursor.execute("""
-copy googleplaystore_clean from 's3://elijah-covid-project/output/googleplaystore_clean.csv'
-credentials 'aws_iam_role:arn:aws:iam::490101006133:role/redshift-s3-access'
+copy googleplaystore_clean from 's3://google-paystore-etl/output/googleplaystore_clean.csv'
+credentials 'aws_iam_role=arn:aws:iam::490101006133:role/redshift-s3-access'
 delimiter ','
 region 'us-east-1'
 IGNOREHEADER 1
@@ -174,8 +173,8 @@ IGNOREHEADER 1
 """)
 
 cursor.execute("""
-copy googleplaystore_review from 's3://elijah-covid-project/output/googleplaystore_review.csv'
-credentials 'aws_iam_role:arn:aws:iam::490101006133:role/redshift-s3-access'
+copy googleplaystore_review from 's3://google-paystore-etl/output/googleplaystore_review.csv'
+credentials 'aws_iam_role=arn:aws:iam::490101006133:role/redshift-s3-access'
 delimiter ','
 region 'us-east-1'
 IGNOREHEADER 1
