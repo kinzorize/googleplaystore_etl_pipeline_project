@@ -14,7 +14,7 @@ In this project, i created a complete end-to-end ETL project using s3, aws glue 
 - pandas
 - boto3
 - IO
-- AWS Redshift (DWH)
+- AWS Redshift (Data warehouse)
 
 # To access the dataset
 

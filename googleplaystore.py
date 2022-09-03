@@ -125,12 +125,13 @@ googleplaystore_review_sql = pd.io.sql.get_schema(
     googleplaystore_review.reset_index(), 'googleplaystore_review')
 print(''.join(googleplaystore_review_sql))
 
-# code to copy paste in glue job to create table and copy the csv to the created table
+# code to copy paste in glue job to create table and copy the
+# csv to the created table in redshift cluster
 conn = redshift_connector.connect(
     host='redshift-cluster-1.cq86xufekc54.us-east-1.redshift.amazonaws.com',
     database='dev',
     user='awsuser',
-    password='123Success'
+    password=''  # i omitted my password
 )
 conn.autocommit = True
 
